@@ -71,8 +71,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FiguresComputerAreaServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ComputeAreaServiceTests.cs" />
+    <Compile Include="BaseTestClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShapeTest.Business\ShapeTest.Business.csproj">

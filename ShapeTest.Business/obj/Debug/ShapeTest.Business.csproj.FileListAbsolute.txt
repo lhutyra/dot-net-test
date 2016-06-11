@@ -1,0 +1,6 @@
+D:\fun\dot-net-test\ShapeTest.Business\bin\Debug\ShapeTest.Business.dll
+D:\fun\dot-net-test\ShapeTest.Business\bin\Debug\ShapeTest.Business.pdb
+D:\fun\dot-net-test\ShapeTest.Business\bin\Debug\SubmissionService.dll
+D:\fun\dot-net-test\ShapeTest.Business\obj\Debug\ShapeTest.Business.csprojResolveAssemblyReference.cache
+D:\fun\dot-net-test\ShapeTest.Business\obj\Debug\ShapeTest.Business.dll
+D:\fun\dot-net-test\ShapeTest.Business\obj\Debug\ShapeTest.Business.pdb

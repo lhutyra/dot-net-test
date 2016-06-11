@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -141,7 +142,16 @@ namespace ShapeTests.ViewModel
 
         public void SubmitArea()
         {
-            _SubmissionService.SubmitTotalArea(TotalArea);
+            try
+            {
+                _SubmissionService.SubmitTotalArea(TotalArea);
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+            
         }
 
         private ObservableCollection<TriangleListItemViewModel> CreateListViewModelsFromTriangeList(List<Triangle> triangles)

@@ -1,0 +1,17 @@
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\ShapeTest.Business.UnitTests.dll
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\ShapeTest.Business.UnitTests.pdb
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\Castle.Core.dll
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\FluentAssertions.Core.dll
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\FluentAssertions.dll
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\Moq.dll
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\ShapeTest.Business.dll
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\ShapeTest.Business.pdb
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\Castle.Core.xml
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\FluentAssertions.pdb
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\FluentAssertions.xml
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\FluentAssertions.Core.pdb
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\FluentAssertions.Core.xml
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\bin\Debug\Moq.xml
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\obj\Debug\ShapeTest.Business.UnitTests.csprojResolveAssemblyReference.cache
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\obj\Debug\ShapeTest.Business.UnitTests.dll
+D:\fun\dot-net-test\ShapeTest.Business.UnitTests\obj\Debug\ShapeTest.Business.UnitTests.pdb

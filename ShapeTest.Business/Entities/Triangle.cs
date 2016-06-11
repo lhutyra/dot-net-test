@@ -1,9 +1,11 @@
-﻿namespace ShapeTest.Business.Entities
+﻿using ShapeTest.Business.Repositories;
+
+namespace ShapeTest.Business.Entities
 {
     using System;
     using System.Collections.Generic;
 
-    public class Triangle
+    public class Triangle : IFigure
     {
         private string _Name;
         private double _Base;
@@ -17,6 +19,11 @@
             set { SetAndRaiseIfChanged(ref _Name, value); }
         }
 
+        public double GetArea()
+        {
+            return 0.5 * Base * Height;
+        }
+
         public double Base
         {
             get { return _Base; }
@@ -25,7 +32,7 @@
 
         public double Height
         {
-            get { return _Height;}
+            get { return _Height; }
             set { SetAndRaiseIfChanged(ref _Height, value); }
         }
 

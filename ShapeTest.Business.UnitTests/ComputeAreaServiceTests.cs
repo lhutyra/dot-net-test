@@ -5,22 +5,39 @@ using Moq;
 using ShapeTest.Business.Entities;
 using ShapeTest.Business.Repositories;
 using ShapeTest.Business.Services;
+using ShapeTest.Business.UnitTests;
 
 namespace ShapeTest.Business.UnitTest
 {
     [TestClass]
-    public class ComputeAreaServiceTests
+    public class ComputeAreaServiceTests : BaseTestClass
     {
         private const double ExpectedPrecision = 0.001;
-
-        private MockRepository _MockRepository;
         private Mock<ITrianglesRepository> _MockTrianglesRepository;
-      
+
         [TestInitialize]
         public void Setup()
         {
-            _MockRepository = new MockRepository(MockBehavior.Strict);
             _MockTrianglesRepository = _MockRepository.Create<ITrianglesRepository>();
+        }
+
+        [TestMethod]
+        public void ShouldReturnZeroForNoneFigures()
+        {
+            List<Triangle> triangles = new List<Triangle>();
+                                     
+
+            _MockTrianglesRepository.Setup(m => m.GetTriangles()).Returns(triangles);
+
+            ComputeAreaService computeAreaService = new ComputeAreaService(_MockTrianglesRepository.Object);
+
+            // Act
+            var result = computeAreaService.ComputeTotalArea();
+
+            // Assert
+            result.Should().BeApproximately(0.0, ExpectedPrecision);
+
+            _MockTrianglesRepository.VerifyAll();
         }
 
         [TestMethod]
@@ -40,7 +57,7 @@ namespace ShapeTest.Business.UnitTest
                     {
                         Base = 3,
                         Height = 6
-                    }                                   
+                    }
             };
 
             _MockTrianglesRepository.Setup(m => m.GetTriangles()).Returns(triangles);
