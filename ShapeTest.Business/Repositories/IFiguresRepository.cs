@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ShapeTest.Business.Entities;
 
 namespace ShapeTest.Business.Repositories
 {
@@ -6,10 +7,10 @@ namespace ShapeTest.Business.Repositories
     {
         event FigureAddedEventHandler FigureAdded;
 
-        List<IFigure> GetFigures();
+        List<FigureBaseEntity> GetFigures();
 
-        void AddFigure(IFigure figure);
+        void AddFigure(FigureBaseEntity figure);
 
-        bool RemoveFigure(IFigure figure);
+        bool RemoveFigure(FigureBaseEntity figure);
     }
 }

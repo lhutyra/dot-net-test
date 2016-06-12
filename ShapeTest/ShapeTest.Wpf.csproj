@@ -92,6 +92,9 @@
     </Compile>
     <Compile Include="Setup.cs" />
     <Compile Include="ShapeTestPresenter.cs" />
+    <Compile Include="Views\ErrorDialogView.xaml.cs">
+      <DependentUpon>ErrorDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddTriangleView.xaml.cs">
       <DependentUpon>AddTriangleView.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
     <Page Include="Popup\PopupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ErrorDialogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddTriangleView.xaml">
       <SubType>Designer</SubType>

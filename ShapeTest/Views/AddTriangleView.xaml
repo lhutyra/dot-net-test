@@ -17,8 +17,8 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Add a Triangle?" Foreground="White"/>
-            <Button Grid.Row="1" Grid.Column="0" Content="Ok" Width="100" Height="30" Command="{Binding AddTriangleCommand}"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Add a Figure?" Foreground="White"/>
+            <Button Grid.Row="1" Grid.Column="0" Content="Ok" Width="100" Height="30" Command="{Binding AddFigureCommand}"/>
             <Button Grid.Row="1" Grid.Column="1" Content="Cancel" Width="100" Height="30" Command="{Binding CancelCommand}"/>
         </Grid>
     </Border>

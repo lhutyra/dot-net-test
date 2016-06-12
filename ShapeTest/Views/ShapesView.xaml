@@ -8,11 +8,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <views:MvxWpfView.Resources>
-        <DataTemplate x:Key ="TriangleListItemTemplate" DataType="{x:Type viewModels:TriangleListItemViewModel}">
+        <DataTemplate x:Key ="TriangleListItemTemplate" DataType="{x:Type viewModels:BaseListItemViewModel}">
             <Grid>
-                <TextBlock x:Name="TriangleName" Text="{Binding TriangleName}" />
+                <TextBlock x:Name="TriangleName" Text="{Binding Name}" />
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key ="FigureListItemTemplate" DataType="{x:Type viewModels:FigureListItemViewModel}">
+            <Grid>
+                <TextBlock x:Name="FigureName" Text="{Binding FigureName}" />
+            </Grid>
+        </DataTemplate>
+
         <DataTemplate x:Key="TriangleContentTemplate" DataType="{x:Type viewModels:TriangleViewModel}">
             <Grid HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
@@ -27,8 +33,8 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
-                
+                <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="IFigure Data Entry"/>
+
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
                 <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
 
@@ -40,31 +46,32 @@
 
             </Grid>
         </DataTemplate>
-        
+
     </views:MvxWpfView.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
-        <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding TriangleListItems}" SelectedItem="{Binding SelectedTriangleListItemViewModel}" ItemTemplate="{StaticResource TriangleListItemTemplate}"/>
-        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding SelectedTriangleContentViewModel}" ContentTemplate="{StaticResource TriangleContentTemplate}"/>
-        
-        <Grid Margin="4,4,4,4" Grid.Row="1" Grid.Column="0">
+        <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding FigureListItems}" SelectedItem="{Binding SelectedFigureListItemViewModel}" ItemTemplate="{StaticResource TriangleListItemTemplate}"/>
+        <ContentControl Grid.Row="0" Grid.Column="1" Content="{Binding SelectedFigureContentViewModel}" ContentTemplate="{StaticResource TriangleContentTemplate}"/>
+        <ComboBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding ListOfFigures}" SelectedItem="{Binding SelectedFigureTypeContentViewModel}"   ItemTemplate="{StaticResource FigureListItemTemplate}"></ComboBox>
+        <Grid Margin="4,4,4,4" Grid.Row="2" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="8"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" x:Name="Add" Content="Add" Command="{Binding AddTriangleCommand}"/>
-            <Button Grid.Column="2" x:Name="Remove" Content="Remove" Command="{Binding RemoveTriangleCommand}"/>
+            <Button Grid.Column="0" x:Name="Add" Content="Add" Command="{Binding AddFigureeCommand}"/>
+            <Button Grid.Column="2" x:Name="Remove" Content="Remove" Command="{Binding RemoveFigureeCommand}"/>
         </Grid>
-        
-        <Grid Margin="4,4,4,4" Grid.Row="1" Grid.Column="1">
+
+        <Grid Margin="4,4,4,4" Grid.Row="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -75,8 +82,8 @@
                 <TextBlock VerticalAlignment="Center" Text="Total Area:"/>
                 <TextBlock VerticalAlignment="Center" Text="{Binding TotalArea}"></TextBlock>
             </StackPanel>
-            <Button Grid.Column="2" Content="Submit Total Area" Command="{Binding SubmitAreaCommand}"/>
+            <Button Grid.Column="2" Content="Submit Total Area" IsEnabled="{Binding IsButtonEnabled}" Command="{Binding SubmitAreaCommand}"/>
         </Grid>
-        
+
     </Grid>
 </views:MvxWpfView>

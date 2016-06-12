@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using MvvmCross.Core.ViewModels;
 using ShapeTest.Business.Entities;
 using ShapeTest.Business.Repositories;
@@ -13,55 +15,78 @@ namespace ShapeTests.ViewModel
 {
     public class ShapesViewModel : ViewModel
     {
-        private readonly ITrianglesRepository _TrianglesRepo;
+        private readonly IFiguresRepository _FiguresesRepo;
+        private readonly IFiguresTypesRepository _FiguresesTypeRepo;
         private readonly IComputeAreaService _ComputeAreaService;
         private readonly ISubmissionService _SubmissionService;
+        
 
-        private ObservableCollection<TriangleListItemViewModel> _TriangleListItems;
+        private ObservableCollection<BaseListItemViewModel> _FigureListItems;
+        private ObservableCollection<FigureTypeViewItem> _ListOfFiguresTypes;
 
-        private TriangleListItemViewModel _SelectedTriangleListItemViewModel;
+        private BaseListItemViewModel _selectedFigureListItemViewModel;
 
-        private TriangleViewModel _SelectedTriangleContentViewModel;
+        private FigureTypeViewItem _selectedFigureTypeContentViewModel;
+
+
+
+        private BaseListItemViewModel _selectedFigureContentViewModel;
 
         private double _TotalArea;
 
-        private MvxCommand _AddTriangleCommand;
+        private MvxCommand _AddFigureCommand;
         private MvxCommand _RemoveTriangleCommand;
         private MvxCommand _ComputeAreaCommand;
         private MvxCommand _SubmitAreaCommand;
 
-        public ShapesViewModel(ITrianglesRepository triangleRepo, 
+        public ShapesViewModel(IFiguresRepository figureListRepository,
                                IComputeAreaService computeAreaService,
-                               ISubmissionService submissionService)
+                               ISubmissionService submissionService,IFiguresTypesRepository figuresRepository)
         {
-            _TrianglesRepo = triangleRepo;
+            _FiguresesRepo = figureListRepository;
             _ComputeAreaService = computeAreaService;
             _SubmissionService = submissionService;
+            _FiguresesTypeRepo = figuresRepository;
+            _FigureListItems = new ObservableCollection<BaseListItemViewModel>();
 
-            _TriangleListItems = new ObservableCollection<TriangleListItemViewModel>();
-
-            AddTriangleCommand = new MvxCommand(AddTriangle);
+            _AddFigureCommand = new MvxCommand(AddFigure);
             RemoveTriangleCommand = new MvxCommand(RemoveSelectedTriangle);
             ComputeAreaCommand = new MvxCommand(ComputeTotalArea);
             SubmitAreaCommand = new MvxCommand(SubmitArea);
         }
 
-        public ObservableCollection<TriangleListItemViewModel> TriangleListItems
+         
+        public ObservableCollection<FigureTypeViewItem> ListOfFiguresTypes
         {
-            get { return _TriangleListItems; }
-            set { SetAndRaisePropertyChanged(ref _TriangleListItems, value); }
+            get
+            {                
+                return _ListOfFiguresTypes;
+            }
+            set { SetAndRaisePropertyChanged(ref _ListOfFiguresTypes, value); }
         }
 
-        public TriangleListItemViewModel SelectedTriangleListItemViewModel
+        public ObservableCollection<BaseListItemViewModel> FigureListItems
         {
-            get { return _SelectedTriangleListItemViewModel; }
-            set { SetAndRaisePropertyChanged(ref _SelectedTriangleListItemViewModel, value); }
+            get { return _FigureListItems; }
+            set { SetAndRaisePropertyChanged(ref _FigureListItems, value); }
         }
 
-        public TriangleViewModel SelectedTriangleContentViewModel
+        public BaseListItemViewModel SelectedFigureListItemViewModel
         {
-            get { return _SelectedTriangleContentViewModel; }
-            set { SetAndRaisePropertyChanged(ref _SelectedTriangleContentViewModel, value); }
+            get { return _selectedFigureListItemViewModel; }
+            set { SetAndRaisePropertyChanged(ref _selectedFigureListItemViewModel, value); }
+        }
+
+        public FigureTypeViewItem SelectedFigureTypeContentViewModel
+        {
+            get { return _selectedFigureTypeContentViewModel; }
+            set { SetAndRaisePropertyChanged(ref _selectedFigureTypeContentViewModel, value); }
+        }        
+
+        public BaseListItemViewModel SelectedFigureContentViewModel
+        {
+            get { return _selectedFigureContentViewModel; }
+            set { SetAndRaisePropertyChanged(ref _selectedFigureContentViewModel, value); }
         }
 
         public double TotalArea
@@ -72,8 +97,8 @@ namespace ShapeTests.ViewModel
 
         public MvxCommand AddTriangleCommand
         {
-            get { return _AddTriangleCommand; }
-            set { SetAndRaisePropertyChanged(ref _AddTriangleCommand, value);}
+            get { return _AddFigureCommand; }
+            set { SetAndRaisePropertyChanged(ref _AddFigureCommand, value); }
         }
 
         public MvxCommand RemoveTriangleCommand
@@ -94,11 +119,19 @@ namespace ShapeTests.ViewModel
             set { SetAndRaisePropertyChanged(ref _SubmitAreaCommand, value); }
         }
 
+        public MvxCommand IsButtonEnabled
+        {
+            get { return _SubmitAreaCommand; }
+            set { SetAndRaisePropertyChanged(ref _SubmitAreaCommand, value); }
+        }
+
+
+
         public override void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             base.RaisePropertyChanged(changedArgs);
 
-            if (changedArgs.PropertyName == nameof(SelectedTriangleListItemViewModel))
+            if (changedArgs.PropertyName == nameof(SelectedFigureListItemViewModel))
             {
                 UpdateTriangleContent();
             }
@@ -106,32 +139,34 @@ namespace ShapeTests.ViewModel
 
         public override void Start()
         {
-           List<Triangle> triangles = _TrianglesRepo.GetTriangles();
-           TriangleListItems = CreateListViewModelsFromTriangeList(triangles);
-           SelectedTriangleListItemViewModel = TriangleListItems.FirstOrDefault();
-
-            _TrianglesRepo.TriangleAdded += OnTriangleAdded;
+            List<FigureBaseEntity> figures = _FiguresesRepo.GetFigures();
+            List<FigureType> figuresType = _FiguresesTypeRepo.GetList();
+            FigureListItems = CreateListViewModelsFromFigureList(figures);
+            ListOfFiguresTypes = CreateListViewModelsFromFigureTypeList(figuresType);
+            SelectedFigureListItemViewModel = FigureListItems.FirstOrDefault();
+            SelectedFigureTypeContentViewModel = ListOfFiguresTypes.FirstOrDefault();
+            _FiguresesRepo.FigureAdded += OnFigureAdded;
         }
 
-        public void AddTriangle()
+        public void AddFigure()
         {
             ShowViewModel<AddTriangleViewModel>();
         }
 
-        public void OnTriangleAdded(object sender, TriangleEventArgs args)
+        public void OnFigureAdded(object sender, FiguresEventArgs args)
         {
-            TriangleListItemViewModel viewModel = new TriangleListItemViewModel { Triangle = args.Triangle };
-            TriangleListItems.Add(viewModel);
+            BaseListItemViewModel viewModel = new BaseListItemViewModel() { Figure = args.Figure };
+            FigureListItems.Add(viewModel);
         }
 
         public void RemoveSelectedTriangle()
         {
-            if (SelectedTriangleListItemViewModel != null)
+            if (SelectedFigureListItemViewModel != null)
             {
-                var viewModelToDelete = SelectedTriangleListItemViewModel;
-                SelectedTriangleContentViewModel = null;
-                _TrianglesRepo.RemoveTriangle(viewModelToDelete.Triangle);
-                TriangleListItems.Remove(viewModelToDelete);
+                var viewModelToDelete = SelectedFigureListItemViewModel;
+                SelectedFigureContentViewModel = null;
+                _FiguresesRepo.RemoveFigure(viewModelToDelete.Figure);
+                FigureListItems.Remove(viewModelToDelete);
             }
         }
 
@@ -140,26 +175,39 @@ namespace ShapeTests.ViewModel
             TotalArea = _ComputeAreaService.ComputeTotalArea();
         }
 
-        public void SubmitArea()
+        public async void SubmitArea()
         {
-            try
-            {
-                _SubmissionService.SubmitTotalArea(TotalArea);
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-            
+            await Task.Factory.StartNew(() =>
+                   {
+                       try
+                       {
+                           _SubmissionService.SubmitTotalArea(TotalArea);
+                       }
+                       catch
+                       {
+                           ShowViewModel<AddTriangleViewModel>();
+                       }
+
+                   });
         }
 
-        private ObservableCollection<TriangleListItemViewModel> CreateListViewModelsFromTriangeList(List<Triangle> triangles)
+        private ObservableCollection<BaseListItemViewModel> CreateListViewModelsFromFigureList(List<FigureBaseEntity> figures)
         {
-            ObservableCollection<TriangleListItemViewModel> viewModels = new ObservableCollection<TriangleListItemViewModel>();
-            foreach (var triangle in triangles)
+            ObservableCollection<BaseListItemViewModel> viewModels = new ObservableCollection<BaseListItemViewModel>();
+            foreach (var figure in figures)
             {
-                TriangleListItemViewModel viewModel = new TriangleListItemViewModel { Triangle = triangle };
+                BaseListItemViewModel viewModel = new BaseListItemViewModel { Figure = figure };
+                viewModels.Add(viewModel);
+            }
+            return viewModels;
+        }
+
+        private ObservableCollection<FigureTypeViewItem> CreateListViewModelsFromFigureTypeList(List<FigureType> figures)
+        {
+            ObservableCollection<FigureTypeViewItem> viewModels = new ObservableCollection<FigureTypeViewItem>();
+            foreach (var figure in figures)
+            {
+                FigureTypeViewItem viewModel = new FigureTypeViewItem() { FigureName = figure.FigureName };
                 viewModels.Add(viewModel);
             }
             return viewModels;
@@ -167,17 +215,17 @@ namespace ShapeTests.ViewModel
 
         private void UpdateTriangleContent()
         {
-            if (SelectedTriangleListItemViewModel != null)
+            if (SelectedFigureListItemViewModel != null)
             {
-                TriangleViewModel contentViewModel = new TriangleViewModel
+                BaseListItemViewModel contentViewModel = new BaseListItemViewModel
                 {
-                    Triangle = _SelectedTriangleListItemViewModel.Triangle
+                    Figure = _selectedFigureListItemViewModel.Figure
                 };
-                SelectedTriangleContentViewModel = contentViewModel;
+                SelectedFigureContentViewModel = contentViewModel;
             }
             else
             {
-                SelectedTriangleListItemViewModel = null;
+                SelectedFigureListItemViewModel = null;
             }
         }
     }

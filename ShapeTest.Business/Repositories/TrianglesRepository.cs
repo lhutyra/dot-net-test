@@ -12,23 +12,14 @@ namespace ShapeTest.Business.Repositories
             _Triangles = new List<Triangle>
             {
                 new Triangle
-                {
-                    Name = "Triangle 1",
-                    Base = 12.5,
-                    Height = 13 
-                },
-                new Triangle
-                {
-                    Name = "Triangle 2",
-                    Base = 23.4,
-                    Height = 14
-                },
-                new Triangle
-                {
-                    Name = "Triangle 3",
-                    Base = 42,
-                    Height = 22
-                }
+                (
+                     "Triangle 1",
+                     12.5,
+                     13 
+                ),
+                new Triangle("Triangle 2",23.4,14),
+               
+                new Triangle("Triangle 3",42,22)              
             };
         }
 

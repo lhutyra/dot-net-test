@@ -52,7 +52,7 @@ namespace ShapeTest.Business.UnitTests
             // Arrange
             const double expectedResult = 0;
 
-            List<IFigure> figures = new List<IFigure>();
+            List<FigureBaseEntity> figures = new List<FigureBaseEntity>();
            
 
             _MockFiguresRepository.Setup(m => m.GetFigures()).Returns(figures);
@@ -74,7 +74,7 @@ namespace ShapeTest.Business.UnitTests
             // Arrange
             const double expectedResult = 100;
 
-            List<IFigure> figures = new List<IFigure>()
+            List<FigureBaseEntity> figures = new List<FigureBaseEntity>()
             {
                 new Rectangle()
                 {

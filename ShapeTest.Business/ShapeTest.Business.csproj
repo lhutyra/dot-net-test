@@ -41,14 +41,18 @@
   <ItemGroup>
     <Compile Include="Entities\EntityChangedEventHandler.cs" />
     <Compile Include="Entities\Figure.cs" />
+    <Compile Include="Entities\FigureBaseEntity.cs" />
+    <Compile Include="Entities\FigureType.cs" />
     <Compile Include="Entities\Rectangle.cs" />
     <Compile Include="Entities\Triangle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\FigureAddedEventHandler.cs" />
     <Compile Include="Repositories\FiguresEventArgs.cs" />
     <Compile Include="Repositories\FiguresRepository.cs" />
+    <Compile Include="Repositories\FiguresTypesRepository.cs" />
     <Compile Include="Repositories\IFigure.cs" />
     <Compile Include="Repositories\IFiguresRepository.cs" />
+    <Compile Include="Repositories\IFiguresTypesRepository.cs" />
     <Compile Include="Repositories\TriangleAddedEventHandler.cs" />
     <Compile Include="Repositories\TriangleEventArgs.cs" />
     <Compile Include="Repositories\TriangleRemovedEventHandler.cs" />

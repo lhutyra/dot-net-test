@@ -2,14 +2,14 @@
 
 namespace ShapeTest.Business.Entities
 {
-    public class Rectangle : IFigure
+    public class Rectangle : FigureBaseEntity
     {
-        public string Name { get; set; }
+        public override string Name { get; set; }
         public double Size { get; set; }
 
-        public double GetArea()
+        public override double GetArea()
         {
-            return Size*Size;
-        }       
+            return Size * Size;
+        }
     }
 }

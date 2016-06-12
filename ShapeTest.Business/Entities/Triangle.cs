@@ -1,25 +1,37 @@
-﻿using ShapeTest.Business.Repositories;
-
+﻿using System;
+using System.Diagnostics;
 namespace ShapeTest.Business.Entities
 {
-    using System;
-    using System.Collections.Generic;
-
-    public class Triangle : IFigure
+    public class Triangle : FigureBaseEntity
     {
         private string _Name;
         private double _Base;
         private double _Height;
 
-        public event EntityChangedEventHandler EntityChanged;
+        public Triangle(string Name,double Base, double Height)
+        {
+            if (Base < 0 || Height < 0)
+            {
+                throw new ArgumentOutOfRangeException("Invalid initalization data");
+            }
+            this._Base = Base;
+            this._Height = Height;
+            this.Name = Name;
+        }
 
-        public string Name
+        public Triangle()
+        {
+            
+        }
+
+
+        public override string Name
         {
             get { return _Name; }
             set { SetAndRaiseIfChanged(ref _Name, value); }
         }
 
-        public double GetArea()
+        public override double GetArea()
         {
             return 0.5 * Base * Height;
         }
@@ -34,21 +46,6 @@ namespace ShapeTest.Business.Entities
         {
             get { return _Height; }
             set { SetAndRaiseIfChanged(ref _Height, value); }
-        }
-
-        public void OnEntityChanged()
-        {
-            EntityChangedEventHandler handler = EntityChanged;
-            handler?.Invoke(this, EventArgs.Empty);
-        }
-
-        public void SetAndRaiseIfChanged<T>(ref T backingField, T newValue)
-        {
-            if (!EqualityComparer<T>.Default.Equals(backingField, newValue))
-            {
-                backingField = newValue;
-                OnEntityChanged();
-            }
-        }
+        }        
     }
 }

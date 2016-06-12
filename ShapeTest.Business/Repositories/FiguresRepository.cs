@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ShapeTest.Business.Entities;
 
 namespace ShapeTest.Business.Repositories
 {
@@ -6,20 +7,43 @@ namespace ShapeTest.Business.Repositories
     {
         public event FigureAddedEventHandler FigureAdded;
 
-        private readonly List<IFigure> _figures;
-        public List<IFigure> GetFigures()
+        private readonly List<FigureBaseEntity> _figures;
+        public List<FigureBaseEntity> GetFigures()
         {
-            throw new System.NotImplementedException();
+            var figures = new List<FigureBaseEntity>
+            {
+                new Triangle
+                (
+                     "Triangle 1",
+                     12.5,
+                     13
+                ),
+                new Triangle("Triangle 2",23.4,14),
+
+                new Triangle("Triangle 3",42,22),
+                 new Rectangle()
+                {
+                    Name = "rect1",
+                    Size = 15
+                }
+            };
+            return figures;
         }
 
-        public void AddFigure(IFigure figure)
+        public void AddFigure(FigureBaseEntity figure)
         {
-            throw new System.NotImplementedException();
+            _figures.Add(figure);
+            OnFigureAdded(figure);
         }
 
-        public bool RemoveFigure(IFigure figure)
+        public bool RemoveFigure(FigureBaseEntity figure)
         {
-            throw new System.NotImplementedException();
+            return _figures.Remove(figure);
+        }
+        protected void OnFigureAdded(FigureBaseEntity triangle)
+        {
+            FigureAddedEventHandler handler = FigureAdded;
+            handler?.Invoke(this, new FiguresEventArgs(triangle));
         }
     }
 }

@@ -41,3 +41,5 @@ D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf.Properties.Resources.resou
 D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf.csproj.GenerateResource.Cache
 D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf.exe
 D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf.pdb
+D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\ErrorDialogView.g.cs
+D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\ErrorDialogView.baml
