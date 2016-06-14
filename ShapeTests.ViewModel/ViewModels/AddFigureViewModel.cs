@@ -2,8 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
-using ShapeTest.Business.Entities;
-using ShapeTest.Business.Repositories;
 
 namespace ShapeTests.ViewModel.ViewModels
 {

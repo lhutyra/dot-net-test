@@ -6,7 +6,7 @@ namespace ShapeTest.Business.Repositories
     public class FiguresRepository : IFiguresRepository
     {
         public event FigureAddedEventHandler FigureAdded;
-        private List<IFigure> _Figures;
+        private readonly List<IFigure> _Figures;
 
         public FiguresRepository()
         {
@@ -27,14 +27,14 @@ namespace ShapeTest.Business.Repositories
                 ,
                 new Square()
                 {
-                    Name = "Rec3 3",
-                    SideLength = 100
+                    Name = "Square 1",
+                    SideLength = 10.0
                 },
-                //  new Square()
-                //{
-                //    Name = "Rec666",
-                //    SideLength = 1.00
-                //}
+                new Circle()
+                {
+                    Name = "Circle 1",
+                    Radius = 10.0
+                }
             };
         }
 

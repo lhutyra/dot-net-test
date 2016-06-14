@@ -21,7 +21,7 @@ namespace ShapeTests.ViewModel
             {
                 Figure.Name = Name;
             }
-            else if (changedArgs.PropertyName == nameof(_Radius))
+            else if (changedArgs.PropertyName == nameof(Radius))
             {
                 ((Circle)Figure).Radius = Radius;
             }

@@ -23,7 +23,7 @@ namespace ShapeTests.ViewModel
                 Figure.Name = Name;
             }
 
-            else if (changedArgs.PropertyName == nameof(_SideLength))
+            else if (changedArgs.PropertyName == nameof(SideLength))
             {
                 ((Square)Figure).SideLength = SideLength;
             }

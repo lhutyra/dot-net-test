@@ -27,11 +27,11 @@ namespace ShapeTests.ViewModel
             {
                 Figure.Name = Name;
             }
-            else if (changedArgs.PropertyName == nameof(_Width))
+            else if (changedArgs.PropertyName == nameof(Width))
             {
                 ((Rectangle)Figure).Width = Width;
             }
-            else if (changedArgs.PropertyName == nameof(_Length))
+            else if (changedArgs.PropertyName == nameof(Length))
             {
                 ((Rectangle)Figure).Length = Length;
             }
