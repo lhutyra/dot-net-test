@@ -10,7 +10,9 @@ namespace ShapeTest.Business.Repositories
             var list = new List<FigureType>()
             {
                 new FigureType() {FigureName = "Triangle"},
-                new FigureType() {FigureName = "Rectangle"}
+                new FigureType() {FigureName = "Rectangle"},
+                new FigureType() {FigureName = "Square"},
+                new FigureType() {FigureName = "Circle"},
             };
             return list;
         }

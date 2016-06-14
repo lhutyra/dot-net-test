@@ -7,7 +7,10 @@ using ShapeTest.Business.Repositories;
 
 namespace ShapeTests.ViewModel.ViewModels
 {
-    public class AddFigureViewModel : ViewModel
+    using ShapeTest.Business.Entities;
+    using ShapeTest.Business.Repositories;
+
+    public class AddFigureViewModel : ViewModel, IPopupViewModel
     {
         private readonly IFiguresRepository _FiguresRepo;
         private readonly IFiguresTypesRepository _FiguresTypeRepo;
