@@ -9,9 +9,9 @@ namespace ShapeTest.Wpf.Views
             InitializeComponent();
         }
 
-        public new AddTriangleViewModel ViewModel
+        public new AddFigureViewModel ViewModel
         {
-            get { return (AddTriangleViewModel)base.ViewModel; }
+            get { return (AddFigureViewModel)base.ViewModel; }
             set { base.ViewModel = value; }
         }
     }

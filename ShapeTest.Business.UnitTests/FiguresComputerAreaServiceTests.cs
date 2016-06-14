@@ -76,9 +76,9 @@ namespace ShapeTest.Business.UnitTests
 
             List<IFigure> figures = new List<IFigure>()
             {
-                new Rectangle()
+                new Square()
                 {
-                    Size = 10
+                    SideLength = 10
                 }
               
             };

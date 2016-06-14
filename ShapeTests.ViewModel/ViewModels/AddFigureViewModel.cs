@@ -53,16 +53,32 @@ namespace ShapeTests.ViewModel.ViewModels
 
         public void AddFigure()
         {
-            IFigure figure;
-            if (_selectedFigureTypeContentViewModel.FigureName == "Rectangle")
+            IFigure figure = null;
+            var selectedFigureType = _selectedFigureTypeContentViewModel.FigureName;
+            if (selectedFigureType == "Square")
             {
                 figure = new ShapeTest.Business.Entities.Square() { Name = "New Square" };
             }
-            else
+            else if (_selectedFigureTypeContentViewModel.FigureName == "Triangle")
             {
                 figure = new Triangle
                 {
                     Name = "New Triangle"
+                };
+            }
+            else if (_selectedFigureTypeContentViewModel.FigureName == "Circle")
+            {
+                figure = new Circle()
+                {
+                    Name = "New Circle"
+                };
+            }
+
+            else if (_selectedFigureTypeContentViewModel.FigureName == "Rectangle")
+            {
+                figure = new Rectangle()
+                {
+                    Name = "New Rectangle"
                 };
             }
 

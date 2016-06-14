@@ -1,14 +1,14 @@
-﻿using ShapeTest.Business.Repositories;
-
-namespace ShapeTest.Business.Entities
+﻿namespace ShapeTest.Business.Entities
 {
     public class Rectangle : BaseFigure
     {        
-        public double Size { get; set; }
+        public double Length { get; set; }
+
+        public double Width { get; set; }
 
         public override double GetArea()
         {
-            return Size * Size;
+            return Length * Width;
         }
     }
 }

@@ -109,7 +109,7 @@
                         <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
 
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Side Length:"/>
-                        <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="4,0,4,0" Text="{Binding SideLength}"/>
+                        <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="4,0,4,0" Text="{Binding Radius}"/>
 
 
                     </Grid>
@@ -123,7 +123,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" x:Name="Add" Content="Add" Command="{Binding AddFigureCommand}"/>
-            <Button Grid.Column="2" x:Name="Remove" Content="Remove" Command="{Binding RemoveTriangleCommand}"/>
+            <Button Grid.Column="2" x:Name="Remove" Content="Remove" Command="{Binding RemoveFigureCommand}"/>
         </Grid>
 
         <Grid Margin="4,4,4,4" Grid.Row="1" Grid.Column="1">

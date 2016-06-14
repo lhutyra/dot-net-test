@@ -28,14 +28,12 @@ D:\fun\dot-net-test\ShapeTest\obj\Debug\MainWindow.baml
 D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\ShapesView.baml
 D:\fun\dot-net-test\ShapeTest\obj\Debug\MainWindow.g.cs
 D:\fun\dot-net-test\ShapeTest\obj\Debug\Popup\PopupWindow.g.cs
-D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\AddTriangleView.g.cs
 D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\ShapesView.g.cs
 D:\fun\dot-net-test\ShapeTest\obj\Debug\App.g.cs
 D:\fun\dot-net-test\ShapeTest\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf_MarkupCompile.cache
 D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf_MarkupCompile.lref
 D:\fun\dot-net-test\ShapeTest\obj\Debug\Popup\PopupWindow.baml
-D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\AddTriangleView.baml
 D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf.g.resources
 D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf.Properties.Resources.resources
 D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf.csproj.GenerateResource.Cache
@@ -43,3 +41,5 @@ D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf.exe
 D:\fun\dot-net-test\ShapeTest\obj\Debug\ShapeTest.Wpf.pdb
 D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\ErrorDialogView.g.cs
 D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\ErrorDialogView.baml
+D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\AddTriangleView.g.cs
+D:\fun\dot-net-test\ShapeTest\obj\Debug\Views\AddTriangleView.baml

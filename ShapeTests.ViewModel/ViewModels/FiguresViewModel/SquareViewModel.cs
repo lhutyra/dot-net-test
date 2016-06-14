@@ -15,7 +15,6 @@ namespace ShapeTests.ViewModel
             set { SetAndRaisePropertyChanged(ref _SideLength, value); }
         }
 
-
         public override void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             base.RaisePropertyChanged(changedArgs);
@@ -30,7 +29,6 @@ namespace ShapeTests.ViewModel
             }
         }
        
-
         protected override void UpdateViewModel()
         {
             Name = Figure.Name;
