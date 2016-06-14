@@ -52,12 +52,12 @@ namespace ShapeTest.Business.UnitTests
             // Arrange
             const double expectedResult = 0;
 
-            List<FigureBaseEntity> figures = new List<FigureBaseEntity>();
+            List<IFigure> figures = new List<IFigure>();
            
 
             _MockFiguresRepository.Setup(m => m.GetFigures()).Returns(figures);
 
-            FiguresComputeAreaService computeAreaService = new FiguresComputeAreaService(_MockFiguresRepository.Object);
+            ComputeAreaService computeAreaService = new ComputeAreaService(_MockFiguresRepository.Object);
 
             // Act
             var result = computeAreaService.ComputeTotalArea();
@@ -74,7 +74,7 @@ namespace ShapeTest.Business.UnitTests
             // Arrange
             const double expectedResult = 100;
 
-            List<FigureBaseEntity> figures = new List<FigureBaseEntity>()
+            List<IFigure> figures = new List<IFigure>()
             {
                 new Rectangle()
                 {
@@ -85,7 +85,7 @@ namespace ShapeTest.Business.UnitTests
 
             _MockFiguresRepository.Setup(m => m.GetFigures()).Returns(figures);
 
-            FiguresComputeAreaService computeAreaService = new FiguresComputeAreaService(_MockFiguresRepository.Object);
+            ComputeAreaService computeAreaService = new ComputeAreaService(_MockFiguresRepository.Object);
 
             // Act
             var result = computeAreaService.ComputeTotalArea();

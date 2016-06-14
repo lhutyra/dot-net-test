@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShapeTest.Business.Entities;
+using ShapeTests.ViewModel;
 using ShapeTests.ViewModel.ViewModels;
 
 namespace ShapeTest.ViewModel.UnitTests
@@ -21,12 +22,12 @@ namespace ShapeTest.ViewModel.UnitTests
             TriangleViewModel viewModel = new TriangleViewModel();
 
             // Act
-            viewModel.Triangle = testTriangle;
+            viewModel.Figure = testTriangle;
 
             // Assert
             viewModel.Name.Should().Be(expectedName);
             viewModel.Base.Should().Be(expectedBase);
-            viewModel.Height.Should().Be(expectedHeight);            
+            viewModel.Height.Should().Be(expectedHeight);
         }
 
         [TestMethod]
@@ -40,7 +41,7 @@ namespace ShapeTest.ViewModel.UnitTests
 
             Triangle testTriangle = CreateTriangle(oldName, expectedBase, expectedHeight);
 
-            TriangleViewModel viewModel = new TriangleViewModel { Triangle = testTriangle };
+            TriangleViewModel viewModel = new TriangleViewModel { Figure = testTriangle };
 
             // Act
             viewModel.Name = expectedName;
@@ -66,7 +67,7 @@ namespace ShapeTest.ViewModel.UnitTests
 
             Triangle testTriangle = CreateTriangle(expectedName, oldBase, expectedHeight);
 
-            TriangleViewModel viewModel = new TriangleViewModel { Triangle = testTriangle };
+            TriangleViewModel viewModel = new TriangleViewModel { Figure = testTriangle };
 
             // Act
             viewModel.Base = expectedBase;
@@ -92,7 +93,7 @@ namespace ShapeTest.ViewModel.UnitTests
 
             Triangle testTriangle = CreateTriangle(expectedName, expectedBase, oldHeight);
 
-            TriangleViewModel viewModel = new TriangleViewModel { Triangle = testTriangle };
+            TriangleViewModel viewModel = new TriangleViewModel { Figure = testTriangle };
 
             // Act
             viewModel.Height = expectedHeight;

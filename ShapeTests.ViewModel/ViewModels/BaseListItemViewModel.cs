@@ -5,16 +5,16 @@ namespace ShapeTests.ViewModel.ViewModels
 {
     public class BaseListItemViewModel : ViewModel
     {
-        private string _Name;
-        private FigureBaseEntity _Figure;
+        private string _FigureName;
+        protected BaseFigure _Figure;
 
-        public string Name
+        public string FigureName
         {
-            get { return _Name; }
-            set { SetAndRaisePropertyChanged(ref _Name, value); }
+            get { return _FigureName; }
+            set { SetAndRaisePropertyChanged(ref _FigureName, value); }
         }
 
-        public FigureBaseEntity Figure
+        public BaseFigure Figure
         {
             get { return _Figure; }
             set { SetAndUpdateTriangleIfChanged(value); }
@@ -22,19 +22,20 @@ namespace ShapeTests.ViewModel.ViewModels
 
         private void UpdateViewModel()
         {
-            _Name = _Figure.Name;
+            FigureName = _Figure.Name;
         }
 
-        private void SetAndUpdateTriangleIfChanged(FigureBaseEntity newTriangle)
+        private void SetAndUpdateTriangleIfChanged(BaseFigure newFigure)
         {
-            if (!ReferenceEquals(_Figure, newTriangle))
+
+            if (!ReferenceEquals(_Figure, newFigure))
             {
                 if (_Figure != null)
                 {
                     _Figure.EntityChanged -= OnFigureChanged;
                 }
 
-                _Figure = newTriangle;
+                _Figure = newFigure;
 
                 if (_Figure != null)
                 {

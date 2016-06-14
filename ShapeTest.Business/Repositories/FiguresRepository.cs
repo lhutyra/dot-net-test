@@ -6,44 +6,58 @@ namespace ShapeTest.Business.Repositories
     public class FiguresRepository : IFiguresRepository
     {
         public event FigureAddedEventHandler FigureAdded;
+        private List<IFigure> _Figures;
 
-        private readonly List<FigureBaseEntity> _figures;
-        public List<FigureBaseEntity> GetFigures()
+        public FiguresRepository()
         {
-            var figures = new List<FigureBaseEntity>
+            _Figures = new List<IFigure>
             {
                 new Triangle
-                (
-                     "Triangle 1",
-                     12.5,
-                     13
-                ),
-                new Triangle("Triangle 2",23.4,14),
-
-                new Triangle("Triangle 3",42,22),
-                 new Rectangle()
                 {
-                    Name = "rect1",
-                    Size = 15
+                    Name = "Triangle 1",
+                    Base = 12.5,
+                    Height = 13
+                },
+                new Triangle
+                {
+                    Name = "Triangle 2",
+                    Base = 23.4,
+                    Height = 14
                 }
+                ,
+                new Square()
+                {
+                    Name = "Rec3 3",
+                    SideLength = 100
+                },
+                //  new Square()
+                //{
+                //    Name = "Rec666",
+                //    SideLength = 1.00
+                //}
             };
-            return figures;
         }
 
-        public void AddFigure(FigureBaseEntity figure)
+        public List<IFigure> GetFigures()
         {
-            _figures.Add(figure);
+            return _Figures;
+        }
+
+        public void AddFigure(IFigure figure)
+        {
+            _Figures.Add(figure);
             OnFigureAdded(figure);
         }
 
-        public bool RemoveFigure(FigureBaseEntity figure)
+        public bool RemoveFigure(IFigure triangle)
         {
-            return _figures.Remove(figure);
+            return _Figures.Remove(triangle);
         }
-        protected void OnFigureAdded(FigureBaseEntity triangle)
+
+        protected void OnFigureAdded(IFigure figure)
         {
             FigureAddedEventHandler handler = FigureAdded;
-            handler?.Invoke(this, new FiguresEventArgs(triangle));
+            handler?.Invoke(this, new FiguresEventArgs(figure));
         }
     }
 }

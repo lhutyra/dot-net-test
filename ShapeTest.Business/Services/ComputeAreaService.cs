@@ -6,18 +6,17 @@ namespace ShapeTest.Business.Services
 
     public class ComputeAreaService : IComputeAreaService
     {
-        private readonly ITrianglesRepository _TrianglesRepo;
+        private readonly IFiguresRepository _FiguresesRepo;
 
-        public ComputeAreaService(ITrianglesRepository trianglesRepo)
+        public ComputeAreaService(IFiguresRepository figuresesRepo)
         {
-            _TrianglesRepo = trianglesRepo;
+            _FiguresesRepo = figuresesRepo;
         }
 
         public double ComputeTotalArea()
         {
-            var triangles = _TrianglesRepo.GetTriangles();
-
-            return triangles.Sum(triangle => 0.5 * triangle.Base * triangle.Height);
+            var figures = _FiguresesRepo.GetFigures();
+            return figures.Sum(f => f.GetArea());
         }
     }
 }

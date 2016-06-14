@@ -7,10 +7,10 @@ namespace ShapeTest.Business.Repositories
     {
         event FigureAddedEventHandler FigureAdded;
 
-        List<FigureBaseEntity> GetFigures();
+        List<IFigure> GetFigures();
 
-        void AddFigure(FigureBaseEntity figure);
+        void AddFigure(IFigure triangle);
 
-        bool RemoveFigure(FigureBaseEntity figure);
+        bool RemoveFigure(IFigure triangle);
     }
 }

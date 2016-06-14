@@ -2,9 +2,8 @@
 
 namespace ShapeTest.Business.Entities
 {
-    public class Rectangle : FigureBaseEntity
-    {
-        public override string Name { get; set; }
+    public class Rectangle : BaseFigure
+    {        
         public double Size { get; set; }
 
         public override double GetArea()

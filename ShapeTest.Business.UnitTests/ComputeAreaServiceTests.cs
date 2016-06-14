@@ -13,31 +13,14 @@ namespace ShapeTest.Business.UnitTest
     public class ComputeAreaServiceTests : BaseTestClass
     {
         private const double ExpectedPrecision = 0.001;
-        private Mock<ITrianglesRepository> _MockTrianglesRepository;
+        
+        private Mock<IFiguresRepository> _MockTFiguresRepository;
 
         [TestInitialize]
         public void Setup()
         {
-            _MockTrianglesRepository = _MockRepository.Create<ITrianglesRepository>();
-        }
-
-        [TestMethod]
-        public void ShouldReturnZeroForNoneFigures()
-        {
-            List<Triangle> triangles = new List<Triangle>();
-                                     
-
-            _MockTrianglesRepository.Setup(m => m.GetTriangles()).Returns(triangles);
-
-            ComputeAreaService computeAreaService = new ComputeAreaService(_MockTrianglesRepository.Object);
-
-            // Act
-            var result = computeAreaService.ComputeTotalArea();
-
-            // Assert
-            result.Should().BeApproximately(0.0, ExpectedPrecision);
-
-            _MockTrianglesRepository.VerifyAll();
+            _MockRepository = new MockRepository(MockBehavior.Strict);
+            _MockTFiguresRepository = _MockRepository.Create<IFiguresRepository>();
         }
 
         [TestMethod]
@@ -46,7 +29,7 @@ namespace ShapeTest.Business.UnitTest
             // Arrange
             const double expectedResult = 13;
 
-            List<Triangle> triangles = new List<Triangle>
+            List<IFigure> triangles = new List<IFigure>
             {
                 new Triangle
                     {
@@ -60,9 +43,9 @@ namespace ShapeTest.Business.UnitTest
                     }
             };
 
-            _MockTrianglesRepository.Setup(m => m.GetTriangles()).Returns(triangles);
+            _MockTFiguresRepository.Setup(m => m.GetFigures()).Returns(triangles);
 
-            ComputeAreaService computeAreaService = new ComputeAreaService(_MockTrianglesRepository.Object);
+            ComputeAreaService computeAreaService = new ComputeAreaService(_MockTFiguresRepository.Object);
 
             // Act
             var result = computeAreaService.ComputeTotalArea();
@@ -70,7 +53,7 @@ namespace ShapeTest.Business.UnitTest
             // Assert
             result.Should().BeApproximately(expectedResult, ExpectedPrecision);
 
-            _MockTrianglesRepository.VerifyAll();
+            _MockTFiguresRepository.VerifyAll();
         }
     }
 }

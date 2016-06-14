@@ -4,16 +4,23 @@ using ShapeTest.Business.Repositories;
 
 namespace ShapeTest.Business.Entities
 {
-    public abstract class FigureBaseEntity : IFigure
+    public abstract class BaseFigure : IFigure
     {
+        protected string _Name;
+        public string Name
+        {
+            get { return _Name; }
+            set { SetAndRaiseIfChanged(ref _Name, value); }
+        }
+
         public event EntityChangedEventHandler EntityChanged;
-        public virtual void OnEntityChanged()
+        public void OnEntityChanged()
         {
             EntityChangedEventHandler handler = EntityChanged;
             handler?.Invoke(this, EventArgs.Empty);
         }
 
-        public virtual void SetAndRaiseIfChanged<T>(ref T backingField, T newValue)
+        public void SetAndRaiseIfChanged<T>(ref T backingField, T newValue)
         {
             if (!EqualityComparer<T>.Default.Equals(backingField, newValue))
             {
@@ -21,9 +28,6 @@ namespace ShapeTest.Business.Entities
                 OnEntityChanged();
             }
         }
-
-        public abstract string Name { get; set; }
         public abstract double GetArea();
-
     }
 }
