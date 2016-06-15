@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShapeTest.Business.Entities;
 using ShapeTests.ViewModel;
-using ShapeTests.ViewModel.ViewModels;
 
 namespace ShapeTest.ViewModel.UnitTests
 {

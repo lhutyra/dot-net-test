@@ -1,12 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Data;
 using MvvmCross.Core.ViewModels;
 using ShapeTest.Business.Entities;
 using ShapeTest.Business.Repositories;
 using ShapeTest.Business.Services;
+using ShapeTest.Wpf;
 using ShapeTests.ViewModel.ViewModels;
 
 namespace ShapeTests.ViewModel
@@ -16,7 +22,7 @@ namespace ShapeTests.ViewModel
         private readonly IFiguresRepository _FiguresRepo;
         private readonly IComputeAreaService _ComputeAreaService;
         private readonly ISubmissionService _SubmissionService;
-        
+
         private ObservableCollection<FigureListItemViewModel> _FigureListItems;
 
         private FigureListItemViewModel _SelectedFigureListItemViewModel;
@@ -35,7 +41,7 @@ namespace ShapeTests.ViewModel
         private MvxCommand _ComputeAreaCommand;
         private MvxCommand _SubmitAreaCommand;
 
-        public  ShapesViewModel(IFiguresRepository figureRepo,
+        public ShapesViewModel(IFiguresRepository figureRepo,
             IComputeAreaService computeAreaService,
             ISubmissionService submissionService)
         {
@@ -43,7 +49,7 @@ namespace ShapeTests.ViewModel
             _ComputeAreaService = computeAreaService;
             _SubmissionService = submissionService;
 
-            //_TriangleListItems = new ObservableCollection<TriangleListItemViewModel>();
+            SubmitCommandAsync = AsyncCommand.Create(() => SubmitAreaAsync());
 
             AddFigureCommand = new MvxCommand(AddTriangle);
             RemoveFigureCommand = new MvxCommand(RemoveSelectedFigure);
@@ -51,21 +57,22 @@ namespace ShapeTests.ViewModel
             SubmitAreaCommand = new MvxCommand(SubmitArea);
         }
 
-        
+        public IAsyncCommand SubmitCommandAsync { get; private set; }
+
         public ObservableCollection<FigureListItemViewModel> FigureListItems
         {
             get { return _FigureListItems; }
             set { SetAndRaisePropertyChanged(ref _FigureListItems, value); }
         }
 
-        
+
         public FigureListItemViewModel SelectedFigureListItemViewModel
         {
             get { return _SelectedFigureListItemViewModel; }
             set { SetAndRaisePropertyChanged(ref _SelectedFigureListItemViewModel, value); }
         }
 
-       
+
         public double TotalArea
         {
             get { return _TotalArea; }
@@ -99,7 +106,7 @@ namespace ShapeTests.ViewModel
         public override void RaisePropertyChanged(PropertyChangedEventArgs changedArgs)
         {
             base.RaisePropertyChanged(changedArgs);
-      
+
             if (changedArgs.PropertyName == nameof(SelectedFigureListItemViewModel))
             {
                 UpdateFigureContent();
@@ -108,8 +115,8 @@ namespace ShapeTests.ViewModel
 
         public override void Start()
         {
-            List<IFigure> figures = _FiguresRepo.GetFigures();          
-            FigureListItems = CreateListViewModelsFromFigureList(figures);            
+            List<IFigure> figures = _FiguresRepo.GetFigures();
+            FigureListItems = CreateListViewModelsFromFigureList(figures);
             SelectedFigureListItemViewModel = FigureListItems.FirstOrDefault();
             _FiguresRepo.FigureAdded += OnFigureAdded;
         }
@@ -121,8 +128,8 @@ namespace ShapeTests.ViewModel
 
         public void OnFigureAdded(object sender, FiguresEventArgs args)
         {
-            FigureListItemViewModel viewModel = null;          
-            viewModel = new FigureListItemViewModel() {Figure = (BaseFigure) args.Figure};
+            FigureListItemViewModel viewModel = null;
+            viewModel = new FigureListItemViewModel() { Figure = (BaseFigure)args.Figure };
             FigureListItems.Add(viewModel);
         }
 
@@ -130,9 +137,9 @@ namespace ShapeTests.ViewModel
         {
             if (SelectedFigureListItemViewModel != null)
             {
-                var viewModelToDelete = SelectedFigureListItemViewModel;                
+                var viewModelToDelete = SelectedFigureListItemViewModel;
                 SelectedFigureeContentViewModel = null;
-                _FiguresRepo.RemoveFigure(viewModelToDelete.Figure);                
+                _FiguresRepo.RemoveFigure(viewModelToDelete.Figure);
                 FigureListItems.Remove(viewModelToDelete);
             }
         }
@@ -145,7 +152,29 @@ namespace ShapeTests.ViewModel
         public void SubmitArea()
         {
             _SubmissionService.SubmitTotalArea(TotalArea);
+
         }
+
+        public async Task<string> SubmitAreaAsync()
+        {
+          TaskFactory tf = new TaskFactory();            
+           return await tf.StartNew(() =>
+            {
+                try
+                {
+                    _SubmissionService.SubmitTotalArea(TotalArea);
+                  
+                    return "Submitted";
+
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;          
+                    //return false;                 
+                }
+            });           
+        }
+               
 
         private ObservableCollection<FigureListItemViewModel> CreateListViewModelsFromFigureList(List<IFigure> figures)
         {
@@ -154,7 +183,7 @@ namespace ShapeTests.ViewModel
             foreach (var figure in figures)
             {
                 FigureListItemViewModel viewModel = new FigureListItemViewModel();
-                viewModel = new FigureListItemViewModel() {Figure = (BaseFigure) figure};
+                viewModel = new FigureListItemViewModel() { Figure = (BaseFigure)figure };
                 viewModels.Add(viewModel);
             }
             return viewModels;
@@ -164,7 +193,7 @@ namespace ShapeTests.ViewModel
         {
             if (SelectedFigureListItemViewModel != null)
             {
-                BaseViewModel contentViewModel = null;              
+                BaseViewModel contentViewModel = null;
                 if (SelectedFigureListItemViewModel.Figure is Triangle)
                 {
                     contentViewModel = new TriangleViewModel
@@ -174,7 +203,7 @@ namespace ShapeTests.ViewModel
                 }
                 else if (SelectedFigureListItemViewModel.Figure is Square)
                 {
-                    contentViewModel = new SquareViewModel {Figure = _SelectedFigureListItemViewModel.Figure};
+                    contentViewModel = new SquareViewModel { Figure = _SelectedFigureListItemViewModel.Figure };
                 }
                 else if (SelectedFigureListItemViewModel.Figure is Circle)
                 {
@@ -187,9 +216,22 @@ namespace ShapeTests.ViewModel
                 SelectedFigureeContentViewModel = contentViewModel;
             }
             else
-            {                
+            {
                 SelectedFigureeContentViewModel = null;
             }
+        }
+
+    }
+    public sealed class NullToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value == null ? Visibility.Collapsed : Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

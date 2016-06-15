@@ -14,7 +14,8 @@
                 <TextBlock x:Name="TriangleName" Text="{Binding FigureName}" />
             </Grid>
         </DataTemplate>
-      
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <viewModel:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
     </views:MvxWpfView.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,115 +27,132 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <ListBox Grid.Row="0" Grid.Column="0" ItemsSource="{Binding FigureListItems}" SelectedItem="{Binding SelectedFigureListItemViewModel}"  ItemTemplate="{StaticResource FigureListItemTemplate}" />
-        <ContentControl Grid.Row="0" Grid.Column="1"  Content="{Binding SelectedFigureeContentViewModel}" >
-            <ContentControl.Resources>
-                <DataTemplate   DataType="{x:Type viewModel:TriangleViewModel}">
-                    <Grid HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+        <Grid  Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <ContentControl Grid.Row="0"    Content="{Binding SelectedFigureeContentViewModel}" >
+                <ContentControl.Resources>
+                    <DataTemplate   DataType="{x:Type viewModel:TriangleViewModel}">
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-                        <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
+                            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Base:"/>
-                        <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="4,0,4,0" Text="{Binding Base}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Base:"/>
+                            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="4,0,4,0" Text="{Binding Base}"/>
 
-                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Height:"/>
-                        <TextBox Grid.Row="3" Grid.Column="1"  x:Name="HeightEntry" Width="120" Margin="4,0,4,0" Text="{Binding Height}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Height:"/>
+                            <TextBox Grid.Row="3" Grid.Column="1"  x:Name="HeightEntry" Width="120" Margin="4,0,4,0" Text="{Binding Height}"/>
 
-                    </Grid>
-                </DataTemplate>
-                <DataTemplate  DataType="{x:Type viewModel:SquareViewModel}">
-                    <Grid HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate  DataType="{x:Type viewModel:SquareViewModel}">
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-                        <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
+                            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Side Length:"/>
-                        <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="4,0,4,0" Text="{Binding SideLength}"/>
-
-
-                    </Grid>
-                </DataTemplate>
-                <DataTemplate  DataType="{x:Type viewModel:CircleViewModel}">
-                    <Grid HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Circle Data Entry"/>
-
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-                        <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
-
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Radius:"/>
-                        <TextBox Grid.Row="2" Grid.Column="1"  x:Name="RadiusEntry" Width="120" Margin="4,0,4,0" Text="{Binding Radius}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Side Length:"/>
+                            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="BaseEntry" Width="120" Margin="4,0,4,0" Text="{Binding SideLength}"/>
 
 
-                    </Grid>
-                </DataTemplate>
-                <DataTemplate  DataType="{x:Type viewModel:RectangleViewModel}">
-                    <Grid HorizontalAlignment="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate  DataType="{x:Type viewModel:CircleViewModel}">
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Circle Data Entry"/>
 
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
-                        <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
+                            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Width:"/>
-                        <TextBox Grid.Row="2" Grid.Column="1"  x:Name="LengthEntry" Width="120" Margin="4,0,4,0" Text="{Binding Length}"/>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Width:"/>
-                        <TextBox Grid.Row="2" Grid.Column="1"  x:Name="WidthEntry" Width="120" Margin="4,0,4,0" Text="{Binding Width}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Radius:"/>
+                            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="RadiusEntry" Width="120" Margin="4,0,4,0" Text="{Binding Radius}"/>
 
 
+                        </Grid>
+                    </DataTemplate>
+                    <DataTemplate  DataType="{x:Type viewModel:RectangleViewModel}">
+                        <Grid HorizontalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                    </Grid>
-                </DataTemplate>
-            </ContentControl.Resources>
-        </ContentControl>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Triangle Data Entry"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
+                            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Width:"/>
+                            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="LengthEntry" Width="120" Margin="4,0,4,0" Text="{Binding Length}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Width:"/>
+                            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="WidthEntry" Width="120" Margin="4,0,4,0" Text="{Binding Width}"/>
+
+
+
+                        </Grid>
+                    </DataTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+            <Grid Grid.Row="1" HorizontalAlignment="Right">
+                <Grid Visibility="{Binding SubmitCommandAsync.Execution, Converter={StaticResource NullToVisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Top" >
+
+                    <Label Visibility="{Binding SubmitCommandAsync.Execution.IsNotCompleted, Converter={StaticResource BooleanToVisibilityConverter}}" Content="" FontSize="12"/>
+
+                    <Label Content="{Binding SubmitCommandAsync.Execution.Result}" Visibility="{Binding SubmitCommandAsync.Execution.IsSuccessfullyCompleted, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                               
+                    <Label Content="{Binding SubmitCommandAsync.Execution.ErrorMessage}" Visibility="{Binding SubmitCommandAsync.Execution.IsFaulted, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Red" />
+            </Grid>
+            </Grid>
+        </Grid>
+
         <Grid Margin="4,4,4,4" Grid.Row="1" Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -156,7 +174,8 @@
                 <TextBlock VerticalAlignment="Center" Text="Total Area:"/>
                 <TextBlock VerticalAlignment="Center" Text="{Binding TotalArea}"></TextBlock>
             </StackPanel>
-            <Button Grid.Column="2" Content="Submit Total Area" Command="{Binding SubmitAreaCommand}"/>
+            <Button Grid.Column="2" Content="Submit Total Area" Command="{Binding SubmitCommandAsync}"/>
+          
         </Grid>
 
     </Grid>
