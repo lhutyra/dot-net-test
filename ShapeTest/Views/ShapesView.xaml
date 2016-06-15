@@ -172,7 +172,7 @@
             <Button Grid.Column="0" Content="Compute Total Area" Command="{Binding ComputeAreaCommand}"/>
             <StackPanel Grid.Column="1" Orientation="Horizontal">
                 <TextBlock VerticalAlignment="Center" Text="Total Area:"/>
-                <TextBlock VerticalAlignment="Center" Text="{Binding TotalArea}"></TextBlock>
+                <TextBlock VerticalAlignment="Center" Text="{Binding TotalArea, StringFormat=N2}"></TextBlock>
             </StackPanel>
             <Button Grid.Column="2" Content="Submit Total Area" Command="{Binding SubmitCommandAsync}"/>
           

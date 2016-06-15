@@ -19,6 +19,7 @@
 
         public override double GetArea()
         {
+            if (Base * Height < 0) return double.NaN;
             return 0.5 * Base * Height;
         }
     }

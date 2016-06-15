@@ -41,7 +41,6 @@
   <ItemGroup>
     <Compile Include="Entities\Circle.cs" />
     <Compile Include="Entities\EntityChangedEventHandler.cs" />
-    <Compile Include="Entities\Figure.cs" />
     <Compile Include="Entities\BaseFigure.cs" />
     <Compile Include="Entities\FigureType.cs" />
     <Compile Include="Entities\Rectangle.cs" />

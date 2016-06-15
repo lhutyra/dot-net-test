@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using MvvmCross.Core.ViewModels;
+using ShapeTests.ViewModel.Helpers;
 
 namespace ShapeTests.ViewModel.ViewModels
 {
@@ -55,35 +56,9 @@ namespace ShapeTests.ViewModel.ViewModels
         public void AddFigure()
         {
             IFigure figure = null;
-            var selectedFigureType = _selectedFigureTypeContentViewModel.FigureName;
-            if (selectedFigureType == "Square")
-            {
-                figure = new ShapeTest.Business.Entities.Square() { Name = "New Square" };
-            }
-            else if (_selectedFigureTypeContentViewModel.FigureName == "Triangle")
-            {
-                figure = new Triangle
-                {
-                    Name = "New Triangle"
-                };
-            }
-            else if (_selectedFigureTypeContentViewModel.FigureName == "Circle")
-            {
-                figure = new Circle()
-                {
-                    Name = "New Circle"
-                };
-            }
-
-            else if (_selectedFigureTypeContentViewModel.FigureName == "Rectangle")
-            {
-                figure = new Rectangle()
-                {
-                    Name = "New Rectangle"
-                };
-            }
-
-            _FiguresRepo.AddFigure(figure);
+            var selectedFigureType = _selectedFigureTypeContentViewModel.FigureName;           
+            var buildedFigure = FigureFactory.GetFigure(selectedFigureType);
+            _FiguresRepo.AddFigure(buildedFigure);
             Close(this);
         }
 

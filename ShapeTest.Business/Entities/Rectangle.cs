@@ -7,7 +7,7 @@
         public double Width { get; set; }
 
         public override double GetArea()
-        {
+        {            
             return Length * Width;
         }
     }

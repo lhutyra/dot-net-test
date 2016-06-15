@@ -43,13 +43,6 @@ namespace ShapeTests.ViewModel
             }
         }
 
-
-
-        //private void OnTriangleChanged(object sender, EventArgs args)
-        //{
-        //    UpdateViewModel();
-        //}
-
         protected override void UpdateViewModel()
         {
             Name = Figure.Name;

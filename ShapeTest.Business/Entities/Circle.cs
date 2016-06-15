@@ -8,6 +8,7 @@ namespace ShapeTest.Business.Entities
 
         public override double GetArea()
         {
+            if (Radius < 0) return double.NaN;
             return Radius * Radius * Math.PI;
         }
     }
