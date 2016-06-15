@@ -130,8 +130,8 @@
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
                             <TextBox Grid.Row="1" Grid.Column="1"  x:Name="NameEntry" Width="120" Margin="4,0,4,0" Text="{Binding Name}"/>
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Width:"/>
-                            <TextBox Grid.Row="2" Grid.Column="1"  x:Name="LengthEntry" Width="120" Margin="4,0,4,0" Text="{Binding Length}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Name:"/>
+                            <TextBox Grid.Row="1" Grid.Column="1"  x:Name="LengthEntry" Width="120" Margin="4,0,4,0" Text="{Binding Length}"/>
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Width:"/>
                             <TextBox Grid.Row="2" Grid.Column="1"  x:Name="WidthEntry" Width="120" Margin="4,0,4,0" Text="{Binding Width}"/>
 

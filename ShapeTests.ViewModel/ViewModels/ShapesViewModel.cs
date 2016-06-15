@@ -169,8 +169,7 @@ namespace ShapeTests.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    return ex.Message;          
-                    //return false;                 
+                    return ex.Message;                              
                 }
             });           
         }

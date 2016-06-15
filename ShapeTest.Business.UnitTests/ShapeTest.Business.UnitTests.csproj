@@ -71,6 +71,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="FigureFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ComputeAreaServiceTests.cs" />
     <Compile Include="BaseTestClass.cs" />
@@ -79,6 +80,14 @@
     <ProjectReference Include="..\ShapeTest.Business\ShapeTest.Business.csproj">
       <Project>{432c0100-85d2-414c-9c2c-51d814768db5}</Project>
       <Name>ShapeTest.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShapeTests.ViewModel\ShapeTests.ViewModel.csproj">
+      <Project>{fc008b42-d59a-41b6-b57a-49eeaf1cc017}</Project>
+      <Name>ShapeTests.ViewModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ShapeTest\ShapeTest.Wpf.csproj">
+      <Project>{4ba831a6-8fad-4e92-b0bf-8d187a1c1faa}</Project>
+      <Name>ShapeTest.Wpf</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

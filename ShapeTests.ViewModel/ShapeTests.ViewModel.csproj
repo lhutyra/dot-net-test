@@ -42,6 +42,7 @@
     <Compile Include="AsyncCommand.cs" />
     <Compile Include="AsyncCommandBase.cs" />
     <Compile Include="Helpers\FigureFactory.cs" />
+    <Compile Include="Helpers\InvalidFigureException.cs" />
     <Compile Include="IAsyncCommand.cs" />
     <Compile Include="NotifyTaskCompletion.cs" />
     <Compile Include="ShapeApplication.cs" />

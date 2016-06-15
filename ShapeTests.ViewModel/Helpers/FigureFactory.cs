@@ -37,7 +37,7 @@ namespace ShapeTests.ViewModel.Helpers
             }
             else
             {
-                throw new Exception("Invalid figure");
+                throw new InvalidFigureException("Invalid figure");
             }
             return figure;
 

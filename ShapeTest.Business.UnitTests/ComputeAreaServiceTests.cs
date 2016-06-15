@@ -93,7 +93,6 @@ namespace ShapeTest.Business.UnitTest
                 {
                     SideLength = 10
                 }
-
             };
 
             _MockFiguresRepository.Setup(m => m.GetFigures()).Returns(figures);
@@ -122,7 +121,6 @@ namespace ShapeTest.Business.UnitTest
                     Length = 10,
                     Width = 25
                 }
-
             };
 
             _MockFiguresRepository.Setup(m => m.GetFigures()).Returns(figures);
@@ -160,6 +158,72 @@ namespace ShapeTest.Business.UnitTest
 
             // Assert
             result.Should().BeApproximately(expectedResult, ExpectedPrecision);
+
+            _MockFiguresRepository.VerifyAll();
+        }
+
+
+        [TestMethod]
+        public void CalculateAreaForMixedCircleFigures()
+        {
+            // Arrange
+            const double expectedResult = Math.PI * 10 * 10 + 250;
+            ComputeAreaService computeAreaService = new ComputeAreaService(_MockFiguresRepository.Object);
+
+            List<IFigure> figures = new List<IFigure>()
+            {
+                new Circle()
+                {
+                    Radius = 10
+                },
+                 new Rectangle()
+                {
+                    Length = 10,
+                    Width = 25
+                }
+
+            };
+
+            _MockFiguresRepository.Setup(m => m.GetFigures()).Returns(figures);
+
+            // Act
+            var result = computeAreaService.ComputeTotalArea();
+
+            // Assert
+            result.Should().BeApproximately(expectedResult, ExpectedPrecision);
+
+            _MockFiguresRepository.VerifyAll();
+        }
+
+
+        [TestMethod]
+        public void ShouldReturnNaNForIncorrectParameters()
+        {
+            // Arrange
+            const double expectedResult = double.NaN;
+            ComputeAreaService computeAreaService = new ComputeAreaService(_MockFiguresRepository.Object);
+
+            List<IFigure> figures = new List<IFigure>()
+            {
+                new Circle()
+                {
+                    Radius = -10
+                },
+                 new Rectangle()
+                {
+                    Length = 10,
+                    Width = 25
+                }
+
+            };
+
+            _MockFiguresRepository.Setup(m => m.GetFigures()).Returns(figures);
+
+            // Act
+            var result = computeAreaService.ComputeTotalArea();
+
+            // Assert
+            result.Should().Be(expectedResult);
 
             _MockFiguresRepository.VerifyAll();
         }
